@@ -11,7 +11,7 @@ export default function App() {
       }
       await showLocalNotification();
     } catch (error) {
-      Alert.alert('Error', 'No se pudo preparar la notificación.');
+      Alert.alert('Error', `No se pudo preparar la notificación.\n${String(error)}`);
     }
   };
 
