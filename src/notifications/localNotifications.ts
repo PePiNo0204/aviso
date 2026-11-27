@@ -1,5 +1,6 @@
 import { Platform } from 'react-native';
 import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
 
 const CHANNEL_ID = 'laboratorio';
 let channelReady = false;
@@ -19,7 +20,6 @@ export async function ensureNotificationPermission(): Promise<boolean> {
             await Notifications.setNotificationChannelAsync(CHANNEL_ID, {
                 name: 'Avisos de laboratorio',
                 importance: Notifications.AndroidImportance.HIGH,
-                sound: 'default',
                 vibrationPattern: [0, 250, 250, 250],
                 lightColor: '#087f8c',
             });
@@ -42,9 +42,9 @@ export async function ensureNotificationPermission(): Promise<boolean> {
 export async function showLocalNotification(): Promise<void> {
     await Notifications.scheduleNotificationAsync({
         content: {
-            title: 'Hola mundo',
+            title: 'Usted es un exitoso 😉',
             body: `Prueba programada el ${new Date().toLocaleString('es-PE')}.`,
-            sound: 'default',
+            sound: true,
         },
         trigger: {
             type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
@@ -52,4 +52,14 @@ export async function showLocalNotification(): Promise<void> {
             channelId: channelReady ? CHANNEL_ID : undefined,
         },
     });
+}
+
+export async function getExpoPushToken(): Promise<string> {
+    const allowed = await ensureNotificationPermission();
+    if (!allowed) throw new Error('Permiso denegado');
+    const projectId = Constants.expoConfig?.extra?.eas?.projectId ??
+        Constants.easConfig?.projectId;
+    if (!projectId) throw new Error('Falta projectId de EAS');
+    const result = await Notifications.getExpoPushTokenAsync({ projectId });
+    return result.data;
 }

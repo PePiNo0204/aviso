@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "558345040663",
+    "project_id": "pam-push---galoc-carlos",
+    "storage_bucket": "pam-push---galoc-carlos.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558345040663:android:714e6fbd01e2dacd97bd52",
+        "android_client_info": {
+          "package_name": "pe.edu.pam.galoccarlos.pushlab"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqQRjgZy14NH9osDpG1waViVzpd10C3T0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
